@@ -13,7 +13,7 @@
                         <h1>Software Enggenering One <span>SEO</span></h1>
                         <p>We are team of talented designers making websites with Bootstrap</p>
                         <div class="d-flex">
-                            <button style="border: none" class="btn-get-started">Login</button>
+                            <button onclick="location.href='{{ route('loginForm') }}'" style="border: none" class="btn-get-started">Login</button>
                         </div>
                     </div>
 
@@ -94,7 +94,7 @@
             <!-- Section Title -->
             <div class="container section-title" data-aos="fade-up">
                 <h2>Gallery</h2>
-                <div><span>Galeri</span> <span class="description-title">Kenangan</span></div>
+                <div><span>Galeri</span> <span class="description-title">Kelas</span></div>
             </div><!-- End Section Title -->
 
             <div class="container" data-aos="fade-up" data-aos-delay="100">
