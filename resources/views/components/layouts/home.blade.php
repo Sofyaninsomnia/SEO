@@ -7,18 +7,18 @@
   <title>Software Enggenering One</title>
   <meta name="description" content="">
   <meta name="keywords" content="">
-  <link href="{{ asset('assets/img/logo-kelas.png')}}" rel="icon">
-  <link href="{{ asset('assets/img/logo-kelas.png')}}" rel="apple-touch-icon">
+  <link href="{{ asset('assets/landing/img/logo-kelas.png')}}" rel="icon">
+  <link href="{{ asset('assets/landing/img/logo-kelas.png')}}" rel="apple-touch-icon">
   <link href="https://fonts.googleapis.com" rel="preconnect">
   <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
-  <link href="{{ asset('assets/vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
-  <link href="{{ asset('assets/vendor/bootstrap-icons/bootstrap-icons.css')}}" rel="stylesheet">
-  <link href="{{ asset('assets/vendor/aos/aos.css')}}" rel="stylesheet">
-  <link href="{{ asset('assets/vendor/glightbox/css/glightbox.min.css')}}" rel="stylesheet">
-  <link href="{{ asset('assets/vendor/swiper/swiper-bundle.min.css')}}" rel="stylesheet">
+  <link href="{{ asset('assets/landing/vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
+  <link href="{{ asset('assets/landing/vendor/bootstrap-icons/bootstrap-icons.css')}}" rel="stylesheet">
+  <link href="{{ asset('assets/landing/vendor/aos/aos.css')}}" rel="stylesheet">
+  <link href="{{ asset('assets/landing/vendor/glightbox/css/glightbox.min.css')}}" rel="stylesheet">
+  <link href="{{ asset('assets/landing/vendor/swiper/swiper-bundle.min.css')}}" rel="stylesheet">
 
-  <link href="{{ asset('assets/css/main.css')}}" rel="stylesheet">
+  <link href="{{ asset('assets/landing/css/main.css')}}" rel="stylesheet">
 
 </head>
 
@@ -29,7 +29,7 @@
 
       <a href="#hero" class="logo d-flex align-items-center">
         <!-- Uncomment the line below if you also wish to use an image logo -->
-        <img src="{{ asset('assets/img/logo-kelas.png')}}" alt="">
+        <img src="{{ asset('assets/landing/img/logo-kelas.png')}}" alt="">
         <h1 class="sitename">S E O</h1>
       </a>
 
@@ -119,15 +119,15 @@
   <div id="preloader"></div>
 
   <!-- Vendor JS Files -->
-  <script src="{{ asset('assets/vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
-  <script src="{{ asset('assets/vendor/php-email-form/validate.js')}}"></script>
-  <script src="{{ asset('assets/vendor/aos/aos.js')}}"></script>
-  <script src="{{ asset('assets/vendor/glightbox/js/glightbox.min.js')}}"></script>
-  <script src="{{ asset('assets/vendor/purecounter/purecounter_vanilla.js')}}"></script>
-  <script src="{{ asset('assets/vendor/swiper/swiper-bundle.min.js')}}"></script>
+  <script src="{{ asset('assets/landing/vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+  <script src="{{ asset('assets/landing/vendor/php-email-form/validate.js')}}"></script>
+  <script src="{{ asset('assets/landing/vendor/aos/aos.js')}}"></script>
+  <script src="{{ asset('assets/landing/vendor/glightbox/js/glightbox.min.js')}}"></script>
+  <script src="{{ asset('assets/landing/vendor/purecounter/purecounter_vanilla.js')}}"></script>
+  <script src="{{ asset('assets/landing/vendor/swiper/swiper-bundle.min.js')}}"></script>
 
   <!-- Main JS File -->
-  <script src="{{ asset('assets/js/main.js')}}"></script>
+  <script src="{{ asset('assets/landing/js/main.js')}}"></script>
 
 </body>
 

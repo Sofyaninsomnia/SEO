@@ -4,7 +4,7 @@
 
         <!-- Hero Section -->
         <section id="hero" class="hero section dark-background">
-            <img src="assets/img/bg-kelas.jpg" alt="" class="hero-bg">
+            <img src="assets/landing/img/bg-kelas.jpg" alt="" class="hero-bg">
 
             <div class="container">
                 <div class="row gy-4 justify-content-between">
@@ -39,7 +39,6 @@
 
         </section>
 
-        <!-- Stats Section -->
         <section id="stats" class="stats section light-background">
 
             <div class="container" data-aos="fade-up" data-aos-delay="100">
@@ -103,64 +102,64 @@
 
                     <div class="col-lg-3 col-md-4">
                         <div class="gallery-item">
-                            <a href="assets/img/gallery/gallery-1.jpg" class="glightbox" data-gallery="images-gallery">
-                                <img src="assets/img/gallery/gallery-1.jpg" alt="" class="img-fluid">
+                            <a href="assets/landing/img/gallery/gallery-1.jpg" class="glightbox" data-gallery="images-gallery">
+                                <img src="assets/landing/img/gallery/gallery-1.jpg" alt="" class="img-fluid">
                             </a>
                         </div>
                     </div><!-- End Gallery Item -->
 
                     <div class="col-lg-3 col-md-4">
                         <div class="gallery-item">
-                            <a href="assets/img/gallery/gallery-2.jpg" class="glightbox" data-gallery="images-gallery">
-                                <img src="assets/img/gallery/gallery-2.jpg" alt="" class="img-fluid">
+                            <a href="assets/landing/img/gallery/gallery-2.jpg" class="glightbox" data-gallery="images-gallery">
+                                <img src="assets/landing/img/gallery/gallery-2.jpg" alt="" class="img-fluid">
                             </a>
                         </div>
                     </div><!-- End Gallery Item -->
 
                     <div class="col-lg-3 col-md-4">
                         <div class="gallery-item">
-                            <a href="assets/img/gallery/gallery-3.jpg" class="glightbox" data-gallery="images-gallery">
-                                <img src="assets/img/gallery/gallery-3.jpg" alt="" class="img-fluid">
+                            <a href="assets/landing/img/gallery/gallery-3.jpg" class="glightbox" data-gallery="images-gallery">
+                                <img src="assets/landing/img/gallery/gallery-3.jpg" alt="" class="img-fluid">
                             </a>
                         </div>
                     </div><!-- End Gallery Item -->
 
                     <div class="col-lg-3 col-md-4">
                         <div class="gallery-item">
-                            <a href="assets/img/gallery/gallery-4.jpg" class="glightbox" data-gallery="images-gallery">
-                                <img src="assets/img/gallery/gallery-4.jpg" alt="" class="img-fluid">
+                            <a href="assets/landing/img/gallery/gallery-4.jpg" class="glightbox" data-gallery="images-gallery">
+                                <img src="assets/landing/img/gallery/gallery-4.jpg" alt="" class="img-fluid">
                             </a>
                         </div>
                     </div><!-- End Gallery Item -->
 
                     <div class="col-lg-3 col-md-4">
                         <div class="gallery-item">
-                            <a href="assets/img/gallery/gallery-5.jpg" class="glightbox" data-gallery="images-gallery">
-                                <img src="assets/img/gallery/gallery-5.jpg" alt="" class="img-fluid">
+                            <a href="assets/landing/img/gallery/gallery-5.jpg" class="glightbox" data-gallery="images-gallery">
+                                <img src="assets/landing/img/gallery/gallery-5.jpg" alt="" class="img-fluid">
                             </a>
                         </div>
                     </div><!-- End Gallery Item -->
 
                     <div class="col-lg-3 col-md-4">
                         <div class="gallery-item">
-                            <a href="assets/img/gallery/gallery-6.jpg" class="glightbox" data-gallery="images-gallery">
-                                <img src="assets/img/gallery/gallery-6.jpg" alt="" class="img-fluid">
+                            <a href="assets/landing/img/gallery/gallery-6.jpg" class="glightbox" data-gallery="images-gallery">
+                                <img src="assets/landing/img/gallery/gallery-6.jpg" alt="" class="img-fluid">
                             </a>
                         </div>
                     </div><!-- End Gallery Item -->
 
                     <div class="col-lg-3 col-md-4">
                         <div class="gallery-item">
-                            <a href="assets/img/gallery/gallery-7.jpg" class="glightbox" data-gallery="images-gallery">
-                                <img src="assets/img/gallery/gallery-7.jpg" alt="" class="img-fluid">
+                            <a href="assets/landing/img/gallery/gallery-7.jpg" class="glightbox" data-gallery="images-gallery">
+                                <img src="assets/landing/img/gallery/gallery-7.jpg" alt="" class="img-fluid">
                             </a>
                         </div>
                     </div><!-- End Gallery Item -->
 
                     <div class="col-lg-3 col-md-4">
                         <div class="gallery-item">
-                            <a href="assets/img/gallery/gallery-8.jpg" class="glightbox" data-gallery="images-gallery">
-                                <img src="assets/img/gallery/gallery-8.jpg" alt="" class="img-fluid">
+                            <a href="assets/landing/img/gallery/gallery-8.jpg" class="glightbox" data-gallery="images-gallery">
+                                <img src="assets/landing/img/gallery/gallery-8.jpg" alt="" class="img-fluid">
                             </a>
                         </div>
                     </div><!-- End Gallery Item -->
@@ -174,7 +173,7 @@
         <!-- Testimonials Section -->
         <section id="testimonials" class="testimonials section dark-background">
 
-            <img src="assets/img/testimonials-bg.jpg" class="testimonials-bg" alt="">
+            <img src="assets/landing/img/testimonials-bg.jpg" class="testimonials-bg" alt="">
 
             <div class="container" data-aos="fade-up" data-aos-delay="100">
 
@@ -198,7 +197,7 @@
 
                         <div class="swiper-slide">
                             <div class="testimonial-item">
-                                <img src="assets/img/testimonials/testimonials-1.jpg" class="testimonial-img"
+                                <img src="assets/landing/img/testimonials/testimonials-1.jpg" class="testimonial-img"
                                     alt="">
                                 <h3>Saul Goodman</h3>
                                 <h4>Ceo &amp; Founder</h4>
@@ -219,7 +218,7 @@
 
                         <div class="swiper-slide">
                             <div class="testimonial-item">
-                                <img src="assets/img/testimonials/testimonials-2.jpg" class="testimonial-img"
+                                <img src="assets/landing/img/testimonials/testimonials-2.jpg" class="testimonial-img"
                                     alt="">
                                 <h3>Sara Wilsson</h3>
                                 <h4>Designer</h4>
@@ -240,7 +239,7 @@
 
                         <div class="swiper-slide">
                             <div class="testimonial-item">
-                                <img src="assets/img/testimonials/testimonials-3.jpg" class="testimonial-img"
+                                <img src="assets/landing/img/testimonials/testimonials-3.jpg" class="testimonial-img"
                                     alt="">
                                 <h3>Jena Karlis</h3>
                                 <h4>Store Owner</h4>
@@ -261,7 +260,7 @@
 
                         <div class="swiper-slide">
                             <div class="testimonial-item">
-                                <img src="assets/img/testimonials/testimonials-4.jpg" class="testimonial-img"
+                                <img src="assets/landing/img/testimonials/testimonials-4.jpg" class="testimonial-img"
                                     alt="">
                                 <h3>Matt Brandon</h3>
                                 <h4>Freelancer</h4>
@@ -282,7 +281,7 @@
 
                         <div class="swiper-slide">
                             <div class="testimonial-item">
-                                <img src="assets/img/testimonials/testimonials-5.jpg" class="testimonial-img"
+                                <img src="assets/landing/img/testimonials/testimonials-5.jpg" class="testimonial-img"
                                     alt="">
                                 <h3>John Larson</h3>
                                 <h4>Entrepreneur</h4>
@@ -324,7 +323,7 @@
 
                     <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
                         <div class="member">
-                            <div class="pic"><img src="assets/img/team/team-1.jpg" class="img-fluid" alt="">
+                            <div class="pic"><img src="assets/landing/img/team/team-1.jpg" class="img-fluid" alt="">
                             </div>
                             <div class="member-info">
                                 <h4>Walter White</h4>
@@ -341,7 +340,7 @@
 
                     <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
                         <div class="member">
-                            <div class="pic"><img src="assets/img/team/team-2.jpg" class="img-fluid" alt="">
+                            <div class="pic"><img src="assets/landing/img/team/team-2.jpg" class="img-fluid" alt="">
                             </div>
                             <div class="member-info">
                                 <h4>Sarah Jhonson</h4>
@@ -358,7 +357,7 @@
 
                     <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
                         <div class="member">
-                            <div class="pic"><img src="assets/img/team/team-3.jpg" class="img-fluid" alt="">
+                            <div class="pic"><img src="assets/landing/img/team/team-3.jpg" class="img-fluid" alt="">
                             </div>
                             <div class="member-info">
                                 <h4>William Anderson</h4>
