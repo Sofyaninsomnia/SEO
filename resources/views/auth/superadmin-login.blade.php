@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="{{ asset('assets/landing/img/logo-kelas.png') }}" rel="icon">
+    <link href="{{ asset('assets/landing/img/logo-kelas.png') }}" rel="apple-touch-icon">
     <link href="{{ asset('assets/landing/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('assets/landing/css/custom.css') }}">
     <title>Sign in - SEO</title>
@@ -22,10 +24,12 @@
                         </div>
                         <div class="login-form">
                             <div class="input-group">
-                                <input required name="email" placeholder="Username" class="login-input" type="email" />
+                                <input required name="email" placeholder="Username" class="login-input"
+                                    type="email" />
                             </div>
                             <div class="input-group">
-                                <input required name="password" placeholder="Password" class="login-input" type="password" />
+                                <input required name="password" placeholder="Password" class="login-input"
+                                    type="password" />
                             </div>
                             <button class="login-btn" type="submit">LOGIN</button>
                         </div>

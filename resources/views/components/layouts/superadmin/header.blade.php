@@ -15,17 +15,18 @@
             <li class="nav-item dropdown pe-3">
 
                 <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-                    <img src="" alt="Profile" class="rounded-circle"
+                    <img src="{{ asset('storage/foto_profil/' . Auth::user()->foto) }}" alt="Profile" class="rounded-circle"
                         style="width: 40px;
                                         height: 50px;
                                         object-fit: cover;
                                         object-position: center;">
-                    <span class="d-none d-md-block dropdown-toggle ps-2">Admin</span>
+                    <span class="d-none d-md-block dropdown-toggle ps-2">{{ Session::get('name') }}</span>
                 </a><!-- End Profile Iamge Icon -->
 
                 <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
                     <li class="dropdown-header">
-                        <h6>Admin@gmail.com</h6>
+                        <h6>{{ Session::get('email') }}</h6>
+                        <span>{{  Session::get('role') }}</span>
                     </li>
                     <li>
                         <hr class="dropdown-divider">
@@ -34,7 +35,7 @@
                     <li>
                         <a class="dropdown-item d-flex align-items-center" href="">
                             <i class="bi bi-person-add"></i>
-                            <span>Kelola Akun</span>
+                            <span>Kelola Akun</span>            
                         </a>
                     </li>
 
