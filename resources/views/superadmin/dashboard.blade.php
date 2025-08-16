@@ -1,16 +1,16 @@
-@extends('components.layouts.admin')
+@extends('components.layouts.superadmin.header-content')
 @section('content')
 
-<x-layouts.header></x-layouts.header>
+<x-layouts.superadmin.header></x-layouts.superadmin.header>
 
-<x-layouts.aside></x-layouts.aside>
+<x-layouts.superadmin.aside></x-layouts.superadmin.aside>
     <main id="main" class="main">
 
         <div class="pagetitle">
             <h1>Dashboard</h1>
             <nav>
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Home</a></li>
+                    <li class="breadcrumb-item"><a href="{{ route('superadmin.dashboard') }}">Home</a></li>
                     <li class="breadcrumb-item active">Dashboard</li>
                 </ol>
             </nav>

@@ -13,7 +13,7 @@
                         <h1>Software Enggenering One <span>SEO</span></h1>
                         <p>We are team of talented designers making websites with Bootstrap</p>
                         <div class="d-flex">
-                            <button onclick="location.href='{{ route('loginForm') }}'" style="border: none" class="btn-get-started">Login</button>
+                            <button onclick="location.href='{{ route('login') }}'" style="border: none" class="btn-get-started">Login</button>
                         </div>
                     </div>
 
