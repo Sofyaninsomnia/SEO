@@ -37,6 +37,8 @@ Route::prefix('admin')->group(function() {
     Route::get('dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
 });
 
+Route::post('/absen', [AbsenController::class, 'store'])->name('absen.store');
+
 Route::prefix('superadmin')->group(function () {
 
     Route::middleware('auth', 'superadmin')->group(function () {
