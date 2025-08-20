@@ -24,7 +24,7 @@
                         </div>
                         <div class="login-form">
                             <div class="input-group">
-                                <input required name="email" placeholder="Username" class="login-input"
+                                <input required name="email" placeholder="Email" class="login-input"
                                     type="email" />
                             </div>
                             <div class="input-group">

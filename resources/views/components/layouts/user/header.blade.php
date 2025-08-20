@@ -2,7 +2,7 @@
 <header id="header" class="header fixed-top d-flex align-items-center">
 
     <div class="d-flex align-items-center justify-content-between">
-        <a href="{{ route('admin.dashboard') }}" class="logo d-flex align-items-center">
+        <a href="{{ route('superadmin.dashboard') }}" class="logo d-flex align-items-center">
             <img src="{{ asset('assets/landing/img/logo-kelas.png') }}" alt="">
             <span class="d-none d-lg-block">S E O</span>
         </a>
@@ -15,7 +15,7 @@
             <li class="nav-item dropdown pe-3">
 
                 <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-                    <img src="" alt="Profile" class="rounded-circle"
+                    <img src="{{ asset('storage/foto_profil/' . Auth::user()->foto) }}" alt="Profile" class="rounded-circle"
                         style="width: 40px;
                                         height: 50px;
                                         object-fit: cover;
@@ -35,7 +35,7 @@
                     <li>
                         <a class="dropdown-item d-flex align-items-center" href="">
                             <i class="bi bi-person-add"></i>
-                            <span>Kelola Akun</span>
+                            <span>Kelola Akun</span>            
                         </a>
                     </li>
 

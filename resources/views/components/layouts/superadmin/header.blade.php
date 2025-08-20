@@ -40,10 +40,10 @@
                     </li>
 
                     <li>
-                        <form action="{{ route('logout-superadmin') }}" method="POST" class="dropdown-item d-flex align-items-center" >
+                        <form action="{{ route('logout') }}" method="POST" id="logout-button" class="dropdown-item d-flex align-items-center" >
                             @csrf
                             <i class="bi bi-box-arrow-right"></i>
-                            <span><button type="submit" style="border: none; background: none;"> LogOut</button></span>
+                            <span><button style="border: none; background: none;"> LogOut</button></span>
                         </form>
                     </li>
 

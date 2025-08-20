@@ -9,6 +9,7 @@
     <link href="{{ asset('assets/landing/img/logo-kelas.png') }}" rel="apple-touch-icon">
     <link href="{{ asset('assets/landing/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('assets/landing/css/custom.css') }}">
+    
     <title>Sign in - SEO</title>
 </head>
 
@@ -16,17 +17,18 @@
     <main class="main">
         <div class="container">
             <div class="d-flex justify-content-center align-items-center ">
-                <form action="" class="login-container" method="POST">
+                <form action="{{ route('user-login') }}" class="login-container" method="POST">
+                    @csrf
                     <div class="login-card">
                         <div class="login-title">
                             <span class="login-text">Login</span>
                         </div>
                         <div class="login-form">
                             <div class="input-group">
-                                <input required="" placeholder="Username" class="login-input" type="text" />
+                                <input required name="email" placeholder="Email" class="login-input" type="email" />
                             </div>
                             <div class="input-group">
-                                <input required="" placeholder="Password" class="login-input" type="password" />
+                                <input required name="password" placeholder="Password" class="login-input" type="password" />
                             </div>
                             <button class="login-btn" type="submit">LOGIN</button>
                         </div>
@@ -36,6 +38,7 @@
             </div>
         </div>
     </main>
+
 </body>
 
 </html>

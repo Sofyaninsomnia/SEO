@@ -5,7 +5,7 @@
 
             <!-- Dashboard -->
             <li class="nav-item">
-                <a class="nav-link @activeclass('superadmin/dashboard')" href="{{ route('superadmin.dashboard')}}">
+                <a class="nav-link @activeclass('user/dashboard')" href="{{ route('user.dashboard')}}">
                     <i class="bi bi-grid"></i>
                     <span>Dashboard</span>
                 </a>
@@ -15,24 +15,16 @@
 
             <!-- KATEGORI -->
             <li class="nav-item">
-                <a class="nav-link @activeclass('superadmin/super-absen')" href="{{ route('super-absen') }}">
+                <a class="nav-link @activeclass('user/absen')" href="{{ route('user_absen') }}">
                     <i class="bi bi-journal-check"></i>
                     <span>Absen</span>
                 </a>
             </li>
 
-            <!-- Data supplier -->
-            <li class="nav-item">
-                <a class="nav-link  @activeclass('superadmin/user-list')" href="{{ route('user-list') }}">
-                    <i class="bi bi-people"></i>
-                    <span>User</span>
-                </a>
-            </li>
-
             <li class="nav-item">
                 <a class="nav-link  @activeclass('admin/data_barang')" href="">
-                    <i class="bi bi-cash-stack"></i>
-                    <span>Kas</span>
+                    <i class="bi bi-chat-quote"></i>
+                    <span>Quote</span>
                 </a>
             </li>
             

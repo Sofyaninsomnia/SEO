@@ -1,14 +1,15 @@
-@extends('components.layouts.superadmin.header-content')
+
+@extends('components.layouts.user.header-content')
 @section('content')
-    <x-layouts.superadmin.header></x-layouts.superadmin.header>
-    <x-layouts.superadmin.aside></x-layouts.superadmin.aside>
+    <x-layouts.user.header></x-layouts.user.header>
+    <x-layouts.user.aside></x-layouts.user.aside>
     <main id="main" class="main">
 
         <div class="pagetitle">
-            <h1>Super absen</h1>
+            <h1>Absen</h1>
             <nav>
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="{{ route('superadmin.dashboard') }}">Home</a></li>
+                    <li class="breadcrumb-item"><a href="{{ route('user.dashboard') }}">Home</a></li>
                     <li class="breadcrumb-item active">Super absen</li>
                 </ol>
             </nav>
@@ -88,86 +89,6 @@
                             </button>
 
                         </div>
-
-                        <div class="col-xxl-4 col-md-6">
-                            <div class="card info-card revenue-card">
-
-                                <div class="card-body">
-                                    <h5 class="card-title">Absen
-                                    </h5>
-
-                                    <div class="d-flex align-items-center">
-                                        <div
-                                            class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                                            <i class="bi bi-people"></i>
-                                        </div>
-                                        <div class="ps-3">
-                                            <h6>99</h6>
-
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-
-                        <div class="col-xxl-4 col-md-6">
-                            <div class="card info-card customers-card">
-
-                                <div class="card-body">
-                                    <h5 class="card-title">Belum absen
-                                    </h5>
-
-                                    <div class="d-flex align-items-center">
-                                        <div
-                                            class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                                            <i class="bi bi-people"></i>
-                                        </div>
-                                        <div class="ps-3">
-                                            <h6>99</h6>
-
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-
-                        <div class="table-responsive">
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="d-flex justify-content-between align-items-center">
-                                        <h4 class="card-title">Data absen harian <span>Tanggal: 17 Agustus 2025</span></h4>
-
-                                        <button class="btn btn-success">Rekap</button>
-                                    </div>
-                                    <table class="table table-bordered">
-                                        <thead>
-                                            <tr>
-                                                <th>No</th>
-                                                <th>Nama</th>
-                                                <th>Status</th>
-                                                <th>Action</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>Swift</td>
-                                                <td>Hadir</td>
-                                                <td class="d-flex gap-2 text-center">
-                                                    <a href="" class="btn btn-sm btn-primary"><i
-                                                            class="bi bi-pen"></i></a>
-                                                    <button class="btn btn-sm btn-danger"><i
-                                                            class="bi bi-trash"></i></button>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-
 
                     </div>
 

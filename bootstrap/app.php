@@ -13,7 +13,8 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->alias([
             'auth' => \Illuminate\Auth\Middleware\Authenticate::class, // Pastikan ini ada
-            'role' => \App\Http\Middleware\AuthMiddleware::class,
+            'user' => \App\Http\Middleware\UserMiddleware::class,
+            'superadmin' => \App\Http\Middleware\SuperMiddleware::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
