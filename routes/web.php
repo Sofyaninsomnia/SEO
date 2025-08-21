@@ -15,8 +15,7 @@ Route::controller(Authenticate::class)->group(function () {
     Route::get('login', 'index')->name('login');
     Route::post('login-user', 'login')->name('user-login');
     Route::post('logout', 'logout')->name('logout');
-    
-    Route::post('post', 'loginSuperadmin')->name('login-superadmin');
+
 });
 
 Route::prefix('user')->group(function() {
@@ -24,6 +23,7 @@ Route::prefix('user')->group(function() {
         Route::get('dashboard', [UserController::class, 'dashboard'])->name('user.dashboard');
 
         Route::get('absen', [AbsenController::class, 'user_absen'])->name('user_absen');
+        Route::post('/absen', [AbsenController::class, 'absenUser'])->name('absen.user');
     });
 });
 
@@ -34,10 +34,13 @@ Route::prefix('admin')->group(function() {
         Route::post('logout', 'logout')->name('logout-superadmin');
     });
 
-    Route::get('dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
-});
+    Route::middleware('auth', 'admin')->group(function() {
+        Route::get('dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
 
-Route::post('/absen', [AbsenController::class, 'store'])->name('absen.store');
+        Route::get('absen', [AbsenController::class, 'admin_absen'])->name('admin_absen');
+        Route::post('post/absen', [AbsenController::class, 'absenAdmin'])->name('absen.admin');
+    });
+});
 
 Route::prefix('superadmin')->group(function () {
 
@@ -45,6 +48,7 @@ Route::prefix('superadmin')->group(function () {
         Route::get('dashboard', [SuperController::class, 'dashboard'])->name('superadmin.dashboard');
 
         Route::get('super-absen', [AbsenController::class, 'super_absen'])->name('super-absen');
+        Route::post('/absen', [AbsenController::class, 'absenSuper'])->name('absen.store');
 
         Route::get('user-list', [UserController::class, 'index'])->name('user-list');
         Route::post('add/user', [UserController::class, 'add_user'])->name('add-user');
@@ -52,3 +56,4 @@ Route::prefix('superadmin')->group(function () {
         Route::delete('hapus/user-data/{id}', [UserController::class, 'deleteUser'])->name('hapus-user');
     });
 });
+

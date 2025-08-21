@@ -15,7 +15,7 @@
             <li class="nav-item dropdown pe-3">
 
                 <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-                    <img src="" alt="Profile" class="rounded-circle"
+                    <img src="{{ asset('storage/foto_profil/' . Auth::user()->foto) }}" alt="Profile" class="rounded-circle"
                         style="width: 40px;
                                         height: 50px;
                                         object-fit: cover;

@@ -1,15 +1,15 @@
-@extends('components.layouts.superadmin.header-content')
+@extends('components.layouts.admin')
 @section('content')
-    <x-layouts.superadmin.header></x-layouts.superadmin.header>
-    <x-layouts.superadmin.aside></x-layouts.superadmin.aside>
+    <x-layouts.header></x-layouts.header>
+    <x-layouts.aside></x-layouts.aside>
     <main id="main" class="main">
 
         <div class="pagetitle">
-            <h1>Super absen</h1>
+            <h1>Admin absen</h1>
             <nav>
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="{{ route('superadmin.dashboard') }}">Home</a></li>
-                    <li class="breadcrumb-item active">Super absen</li>
+                    <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Home</a></li>
+                    <li class="breadcrumb-item active">Admin absen</li>
                 </ol>
             </nav>
         </div><!-- End Page Title -->
@@ -19,7 +19,7 @@
 
                 <!-- Left side columns -->
                 <div class="col-lg-12">
-                    <div class="row">
+                    <div class="row"> 
 
                         <!-- Sales Card -->
                         @if (!$userAbsen)
@@ -30,7 +30,7 @@
                             </div>
 
                             <div class="d-flex justify-content-center align-items-center mb-4">
-                                <form id="absenForm" action="{{ route('absen.store') }}" method="POST">
+                                <form id="absenForm" action="{{ route('absen.admin') }}" method="POST">
                                     @csrf
                                     <input type="hidden" name="latitude" id="latitude">
                                     <input type="hidden" name="longitude" id="longitude">

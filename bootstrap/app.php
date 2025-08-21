@@ -14,6 +14,7 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->alias([
             'auth' => \Illuminate\Auth\Middleware\Authenticate::class, // Pastikan ini ada
             'user' => \App\Http\Middleware\UserMiddleware::class,
+            'admin' => \App\Http\Middleware\AdminMiddleware::class,
             'superadmin' => \App\Http\Middleware\SuperMiddleware::class,
         ]);
     })

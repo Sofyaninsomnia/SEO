@@ -56,27 +56,81 @@
 
   {{-- Script untuk menampilkan SweetAlert --}}
   <script>
-    $(document).ready(function() {
-        // Cek apakah ada pesan 'success' dari session
-        @if(session('success'))
-            Swal.fire({
-                title: 'Berhasil!',
-                text: '{{ session('success') }}',
-                icon: 'success',
-                confirmButtonText: 'OK'
-            });
-        @endif
-
-        @if($errors->any())
-            Swal.fire({
-                title: 'Kesalahan!',
-                html: '@foreach ($errors->all() as $error) {{ $error }}<br> @endforeach',
-                icon: 'error',
-                confirmButtonText: 'OK'
-            });
-        @endif
-    });
+    function updateTime() {
+            const now = new Date();
+            const options = {
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit'
+            };
+            document.getElementById('current-time').textContent = now.toLocaleTimeString('id-ID', options);
+        }
+        setInterval(updateTime, 1000);
+        updateTime(); // Initial call
   </script>
+  <script>
+        $(document).ready(function() {
+            // Cek apakah ada pesan 'success' dari session
+            @if (session('success'))
+                Swal.fire({
+                    title: 'Login Sukses!',
+                    text: '{{ session('success') }}',
+                    html: `
+                        <img src="https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3a3lobjFyYnIwbHgybG42bzQwMTJvZDFzZXhqeDJjbHBwczdkc3gzMyZlcD12MV9zdGlja2Vyc19zZWFyY2gmY3Q9cw/AQmRoVFBa1DDQeXprE/giphy.gif" 
+                            width="140" style="border-radius: 10px;" alt="Success">
+                        <p style="margin-top: 10px;">{{ session('success') }} 🎉</p>
+                    `,
+                    confirmButtonText: 'OK'
+                });
+            @endif
+            @if (session('sukses'))
+                Swal.fire({
+                    title: 'Berhasil!',
+                    text: '{{ session('sukses') }}',
+                    icon: 'success',
+                    confirmButtonText: 'OK'
+                });
+            @endif
+
+            @if ($errors->any())
+                Swal.fire({
+                    title: 'Kesalahan!',
+                    html: '@foreach ($errors->all() as $error) {{ $error }}<br> @endforeach',
+                    icon: 'error',
+                    confirmButtonText: 'OK'
+                });
+            @endif
+        });
+    </script>
+
+    <script>
+        $(document).ready(function() {
+            document.getElementById('logout-button').addEventListener('submit', function(e) {
+                e.preventDefault();
+
+                var form = this;
+
+                Swal.fire({
+                    title: 'Yakin ingin logout?',
+                    html: `
+                    <img src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExdjF6bDRkN3UzZjB1MzM2bHd5eDFhMmdmOWVsd20zNWE4eGt2NmVubCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/5xqyWhU3zZ0qZ6C6di/giphy.gif"
+                    width="140"
+                    style="border-radius: 10px;"
+                    alt="Logout GIF">
+                    <p style="margin-top: 10px;">Bener mau keluar? 🥲</p>`,
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Ya, Logout!',
+                    cancelButtonText: 'Batal'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        form.submit();
+                    }
+                });
+            });
+        });
+    </script>
 
   @stack('scripts')
 

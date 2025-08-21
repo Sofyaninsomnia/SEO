@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Absen;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 class AbsenController extends Controller
 {
@@ -26,20 +27,43 @@ class AbsenController extends Controller
 
     public function user_absen()
     {
-        return view('absen.user');
+        Carbon::setLocale('id'); 
+
+        $tanggal = Carbon::today()->translatedFormat('l, d F Y');
+        $userId = Auth::id();
+        $userAbsen = Absen::where('user_id', $userId)->whereDate('tanggal', Carbon::today())->exists();
+        return view('absen.user', compact('userAbsen', 'tanggal'));
     }
 
+
+    public function admin_absen()
+    {
+        Carbon::setLocale('id'); 
+
+        $tanggal = Carbon::today()->translatedFormat('l, d F Y');
+        $userId = Auth::id();
+        $today = Carbon::today();
+        $userAbsen = Absen::where('user_id', $userId)->whereDate('tanggal', $today)->exists();
+        $dataUserAbsen = Absen::whereDate('tanggal', $today)->get();
+        return view('admin.absen', compact('userAbsen', 'tanggal', 'dataUserAbsen'));
+    }
 
     public function super_absen()
     {
+        Carbon::setLocale('id'); 
 
-        return view('absen.superadmin-absen');
+        $tanggal = Carbon::today()->translatedFormat('l, d F Y');
+        $userId = Auth::id();
+        $today = Carbon::today();
+        $userAbsen = Absen::where('user_id', $userId)->whereDate('tanggal', $today)->exists();
+        $dataUserAbsen = Absen::whereDate('tanggal', $today)->get();
+        return view('absen.superadmin-absen', compact('userAbsen', 'tanggal', 'dataUserAbsen'));
     }
 
-    public function store(Request $request)
+    public function absenUser(Request $request)
     {
         $request->validate([
-            'latitude' => 'required|numeric',
+            'latitude' => 'required|numeric',       
             'longitude' => 'required|numeric',
         ]);
 
@@ -52,9 +76,10 @@ class AbsenController extends Controller
         $timezone = 'Asia/Jakarta';
         $deadlineTime = Carbon::createFromFormat('H:i:s', env('ABSEN_DEADLINE_TIME'), $timezone);
         $absenTime = Carbon::now($timezone);
+        $userAbsen = Auth::id();
 
         $status = 'hadir';
-        
+
         if ($absenTime->gt($deadlineTime)) {
             $status = 'telat';
         }
@@ -63,7 +88,89 @@ class AbsenController extends Controller
 
         if ($distance <= $allowedRadius) {
             Absen::create([
-                'user_id' => auth()->id(),
+                'user_id' => $userAbsen,
+                'latitude' => $userLat,
+                'longitude' => $userLon,
+                'tanggal' => $absenTime->toDateString(),
+                'waktu' => $absenTime->toTimeString(),
+                'status'    => $status,
+                'distance' => $distance,
+            ]);
+            return redirect()->route('user_absen')->with('sukses', 'Absensi berhasil!');
+        } else {
+            return redirect()->route('user_absen')->with('error', 'Anda berada di luar area yang diperbolehkan. Jarak Anda: ' . number_format($distance, 2) . ' km');
+        }
+    }
+    public function absenAdmin(Request $request)
+    {
+        $request->validate([
+            'latitude' => 'required|numeric',       
+            'longitude' => 'required|numeric',
+        ]);
+
+        $userLat = $request->input('latitude');
+        $userLon = $request->input('longitude');
+
+        $officeLat = (float) env('OFFICE_LATITUDE');
+        $officeLon = (float) env('OFFICE_LONGITUDE');
+        $allowedRadius = (float) env('ALLOWED_RADIUS_KM');
+        $timezone = 'Asia/Jakarta';
+        $deadlineTime = Carbon::createFromFormat('H:i:s', env('ABSEN_DEADLINE_TIME'), $timezone);
+        $absenTime = Carbon::now($timezone);
+        $userAbsen = Auth::id();
+
+        $status = 'hadir';
+
+        if ($absenTime->gt($deadlineTime)) {
+            $status = 'telat';
+        }
+
+        $distance = $this->haversineDistance($officeLat, $officeLon, $userLat, $userLon);
+
+        if ($distance <= $allowedRadius) {
+            Absen::create([
+                'user_id' => $userAbsen,
+                'latitude' => $userLat,
+                'longitude' => $userLon,
+                'tanggal' => $absenTime->toDateString(),
+                'waktu' => $absenTime->toTimeString(),
+                'status'    => $status,
+                'distance' => $distance,
+            ]);
+            return redirect()->route('admin_absen')->with('sukses', 'Absensi berhasil!');
+        } else {
+            return redirect()->route('admin_absen')->with('error', 'Anda berada di luar area yang diperbolehkan. Jarak Anda: ' . number_format($distance, 2) . ' km');
+        }
+    }
+    public function absenSuper(Request $request)
+    {
+        $request->validate([
+            'latitude' => 'required|numeric',       
+            'longitude' => 'required|numeric',
+        ]);
+
+        $userLat = $request->input('latitude');
+        $userLon = $request->input('longitude');
+
+        $officeLat = (float) env('OFFICE_LATITUDE');
+        $officeLon = (float) env('OFFICE_LONGITUDE');
+        $allowedRadius = (float) env('ALLOWED_RADIUS_KM');
+        $timezone = 'Asia/Jakarta';
+        $deadlineTime = Carbon::createFromFormat('H:i:s', env('ABSEN_DEADLINE_TIME'), $timezone);
+        $absenTime = Carbon::now($timezone);
+        $userAbsen = Auth::id();
+
+        $status = 'hadir';
+
+        if ($absenTime->gt($deadlineTime)) {
+            $status = 'telat';
+        }
+
+        $distance = $this->haversineDistance($officeLat, $officeLon, $userLat, $userLon);
+
+        if ($distance <= $allowedRadius) {
+            Absen::create([
+                'user_id' => $userAbsen,
                 'latitude' => $userLat,
                 'longitude' => $userLon,
                 'tanggal' => $absenTime->toDateString(),

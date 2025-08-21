@@ -15,9 +15,9 @@
 
             <!-- KATEGORI -->
             <li class="nav-item">
-                <a class="nav-link collapsed @activeclass('admin/kategori')" href="">
-                    <i class="bi bi-tags"></i>
-                    <span>Kategori</span>
+                <a class="nav-link collapsed @activeclass('admin/absen')" href="{{ route('admin_absen') }}">
+                    <i class="bi bi-journal-check"></i>
+                    <span>Absen</span>
                 </a>
             </li>
 
