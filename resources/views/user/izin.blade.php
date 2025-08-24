@@ -5,50 +5,53 @@
     <main id="main" class="main">
 
         <div class="pagetitle">
-            <h1>Absen</h1>
+            <h1>Form izin</h1>
             <nav>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ route('user.dashboard') }}">Home</a></li>
-                    <li class="breadcrumb-item active">Absen</li>
+                    <li class="breadcrumb-item"><a href="{{ route('absen.user') }}">Absen</a></li>
+                    <li class="breadcrumb-item active">Form izin</li>
                 </ol>
             </nav>
-        </div><!-- End Page Title -->
+        </div>
 
         <section class="section dashboard">
             <div class="row">
 
-                <!-- Left side columns -->
                 <div class="col-lg-12">
                     <div class="row">
 
-                        <!-- Sales Card -->
-                        @if (!$userAbsen)
-                            <div class="col-xxl-2 col-xl-12">
-                                <div class="alert alert-warning text-center"><i
-                                        class="bi bi-exclamation-circle-fill"></i><span>
-                                        Anda belum absen hari ini</span></div>
-                            </div>
-
-                            <div class="d-flex justify-content-center align-items-center mb-4 gap-2">
-                                <form id="absenForm" action="{{ route('absen.user') }}" method="POST">
+                        <div class="card">
+                            <h2 class="card-title">Form pengajuan izin absen</h2>
+                            <div class="card-body">
+                                <form id="absenForm" action="{{ route('kirim-izin') }}" method="POST" enctype="multipart/form-data">
                                     @csrf
                                     <input type="hidden" name="latitude" id="latitude">
                                     <input type="hidden" name="longitude" id="longitude">
-                                    <button type="button" onclick="getLocation()" class="btn btn-primary">Absen
-                                        </button>
+                                    <div class="form-group mb-2">
+                                        <label for="status">Status</label>
+                                        <select name="status" class="form-select">
+                                            <option value="" selected disabled>Opsi absen</option>
+                                            <option value="izin">Izin</option>
+                                            <option value="sakit">Sakit</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group mb-2">
+                                        <label for="file">Foto surat</label><small class="text-danger sm" style="font-size: 12px"> maximal 5mb</small>
+                                        <input type="file" name="file" class="form-control">
+                                    </div>
+                                    <div class="form-group mb-2">
+                                        <label for="keterangan">Keterangan</label>
+                                        <textarea name="keterangan" rows="5" placeholder="(Opsional)" class="form-control"></textarea>
+                                    </div>
+                                    <div class="d-flex gap-2">
+                                        <button type="button" onclick="getLocation()" class="btn btn-primary">Kirim</button>
+                                        <button type="reset" class="btn btn-secondary">Reset</button>
+                                        <a href="{{ route('absen.user') }}" class="btn btn-danger">Kembali</a>
+                                    </div>
                                 </form>
-                                
-                                <a href="{{ route('form_izin') }}" type="button" class="btn btn-success">Izin</a>
-
                             </div>
-                        @else
-                            <div class="col-xxl-2 col-xl-12">
-                                <div class="alert alert-success text-center">
-                                    <i class="bi bi-check-circle-fill"></i>
-                                    <span>Anda sudah absen hari ini</span>
-                                </div>
-                            </div>
-                        @endif
+                        </div>
 
                     </div>
 

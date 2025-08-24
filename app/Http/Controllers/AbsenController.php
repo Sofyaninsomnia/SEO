@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\Absen;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 
 class AbsenController extends Controller
 {
@@ -43,8 +45,8 @@ class AbsenController extends Controller
         $tanggal = Carbon::today()->translatedFormat('l, d F Y');
         $userId = Auth::id();
         $today = Carbon::today();
-        $userAbsen = Absen::where('user_id', $userId)->whereDate('tanggal', $today)->exists();
         $dataUserAbsen = Absen::whereDate('tanggal', $today)->get();
+        $userAbsen = Absen::where('user_id', $userId)->whereDate('tanggal', $today)->exists();
         return view('admin.absen', compact('userAbsen', 'tanggal', 'dataUserAbsen'));
     }
 
@@ -52,12 +54,14 @@ class AbsenController extends Controller
     {
         Carbon::setLocale('id'); 
 
+        // $absen = Absen::findOrFail($id);
+        $status = DB::table('absen')->distinct()->pluck('status');
         $tanggal = Carbon::today()->translatedFormat('l, d F Y');
         $userId = Auth::id();
         $today = Carbon::today();
         $userAbsen = Absen::where('user_id', $userId)->whereDate('tanggal', $today)->exists();
         $dataUserAbsen = Absen::whereDate('tanggal', $today)->get();
-        return view('absen.superadmin-absen', compact('userAbsen', 'tanggal', 'dataUserAbsen'));
+        return view('absen.superadmin-absen', compact('userAbsen', 'tanggal', 'dataUserAbsen', 'status'));
     }
 
     public function absenUser(Request $request)
@@ -142,6 +146,7 @@ class AbsenController extends Controller
             return redirect()->route('admin_absen')->with('error', 'Anda berada di luar area yang diperbolehkan. Jarak Anda: ' . number_format($distance, 2) . ' km');
         }
     }
+
     public function absenSuper(Request $request)
     {
         $request->validate([
@@ -182,5 +187,67 @@ class AbsenController extends Controller
         } else {
             return redirect()->route('super-absen')->with('error', 'Anda berada di luar area yang diperbolehkan. Jarak Anda: ' . number_format($distance, 2) . ' km');
         }
+    }
+
+    public function updateSuper(Request $request, $id){
+        $absen = Absen::findOrFail($id);
+
+        $rules = [
+            'status'    => 'in:hadir,telat,alfa,sakit,izin'
+        ];
+
+        $validator = Validator::make($request->all(), $rules);
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
+        $validate = $request->validate($rules);
+
+        $absen->update($validate);
+        return redirect()->back()->with('sukses', 'Data berhasil diupdate');
+    }
+
+    public function deleteSuper($id){
+        $absen = Absen::findOrFail($id);
+
+        $absen->delete();
+
+        return redirect()->back()->with('sukses', 'Data berhasil dihapus');
+    }
+
+    public function formIzin(){
+        return view('user.izin');
+    }
+
+    public function postIzin(Request $request){
+        $request->validate([
+            'latitude'      => 'required|numeric',
+            'longitude'     => 'required|numeric',
+            'status'        => 'required|in:izin,sakit',
+            'file'          => 'required|image|mimes:jpg,png,jpeg|max:5048',
+            'keterangan'    => 'nullable|string|max:255'
+        ]);
+
+        $userLat = $request->input('latitude');
+        $userLon = $request->input('longitude');
+        $timezone = 'Asia/Jakarta';
+        $absenTime = Carbon::now($timezone);
+        $userAbsen = Auth::id();
+
+        $foto = $request->file('file')->store('surat', 'public');
+
+        Absen::create([
+            'user_id'       => $userAbsen,
+            'latitude'      => $userLat,
+            'longitude'     => $userLon,
+            'tanggal'       => $absenTime->toDateString(),
+            'waktu'         => $absenTime->toTimeString(),
+            'status'        => $request->status,
+            'file'          => $foto,
+            'keterangan'    => $request->keterangan
+        ]);
+
+        return redirect()->back()->with('sukses', 'Izin berhasil di kirim');
     }
 }

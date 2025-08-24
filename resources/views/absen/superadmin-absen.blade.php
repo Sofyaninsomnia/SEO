@@ -96,7 +96,7 @@
                             <div class="card-body">
                                 <div class="d-flex justify-content-between align-items-center">
                                     <h4 class="card-title">Data absen harian <span>Tanggal: {{ $tanggal }}</span></h4>
-                                    
+
                                     <button class="btn btn-success">Rekap</button>
                                 </div>
                                 <div class="table-responsive">
@@ -114,20 +114,26 @@
                                         <tbody>
                                             @forelse ($dataUserAbsen as $absen)
                                                 <tr>
-                                                <td>{{ $loop->iteration }}</td>
-                                                <td>{{ $absen->user->name }}</td>
-                                                <td>{{ $absen->status }}</td>
-                                                <td>{{ $absen->waktu }}</td>
-                                                <td>{{ $absen->keterangan }}</td>
-                                                <td class="d-flex gap-2 text-center">
-                                                    <button class="btn btn-sm btn-primary"><i
-                                                            class="bi bi-pen"></i></button>
-                                                    <button class="btn btn-sm btn-danger"><i
-                                                            class="bi bi-trash"></i></button>
-                                                </td>
-                                            </tr>
+                                                    <td>{{ $loop->iteration }}</td>
+                                                    <td>{{ $absen->user->name }}</td>
+                                                    <td>{{ ucwords($absen->status) }}</td>
+                                                    <td>{{ $absen->waktu }}</td>
+                                                    <td>{{ $absen->keterangan }}</td>
+                                                    <td class="d-flex gap-2 text-center">
+                                                        <button class="btn btn-sm btn-primary btn-edit"
+                                                            data-id="{{ $absen->id }}"
+                                                            data-name="{{ $absen->user->name }}"
+                                                            data-status="{{ $absen->status }}" data-bs-toggle="modal"
+                                                            data-bs-target="#editModal"><i class="bi bi-pen"></i></button>
+                                                        <form class="delete-form" action="{{ route('delete.absen', $absen->id) }}" method="POST">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button class="btn btn-sm btn-danger"><i
+                                                                    class="bi bi-trash"></i></button>
+                                                        </form>
+                                                    </td>
+                                                </tr>
                                             @empty
-                                                
                                             @endforelse
                                         </tbody>
                                     </table>
@@ -135,19 +141,94 @@
                             </div>
                         </div>
 
+                        <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel"
+                            aria-hidden="true">
+                            <div class="modal-dialog">
+                                <form id="formEdit" action="" method="post" accept-charset="utf-8">
+                                    @csrf
+                                    @method('PUT')
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="addModalLabel">Edit absen</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <input type="hidden" name="id" id="edit_id">
+                                            <div class="form-group mb-2">
+                                                <label for="edit_name">Nama </label>
+                                                <input type="text" name="name" id="edit_name" class="form-control"
+                                                    placeholder="Nama pengguna" readonly>
+                                            </div>
+                                            <div class="form-group mb-2">
+                                                <select name="status" id="edit_status" class="form-select" required>
+                                                    <option value="" selected disabled>User role</option>
+                                                    @foreach ($status as $s)
+                                                        <option value="{{ $s }}">{{ ucwords($s) }}
+                                                        </option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="submit" class="btn btn-success">Simpan</button>
+                                            <button type="button" class="btn btn-secondary"
+                                                data-bs-dismiss="modal">Batal</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
 
                     </div>
 
                 </div>
             </div>
-
-            </div>
-            </div>
-            </div>
         </section>
     </main>
 @endsection
 @push('scripts')
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+
+            document.querySelectorAll('.btn-edit').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const id = this.dataset.id;
+                    const name = this.dataset.name;
+                    const status = this.dataset.status;
+
+                    document.getElementById('formEdit').action =
+                        `/superadmin/change/data-absen/${id}`;
+
+                    document.getElementById('edit_id').value = id;
+                    document.getElementById('edit_name').value = name;
+                    document.getElementById('edit_status').value = status;
+
+                });
+            });
+
+            const deleteForms = document.querySelectorAll('.delete-form');
+            deleteForms.forEach(form => {
+                form.addEventListener('submit', function(event) {
+                    event.preventDefault();
+
+                    Swal.fire({
+                        title: "Apa kamu yakin?",
+                        text: "Data ini akan dihapus secara permanen!!",
+                        icon: "warning",
+                        showCancelButton: true,
+                        confirmButtonColor: "#3085d6",
+                        cancelButtonColor: "#d33",
+                        confirmButtonText: "Ya, saya yakin!"
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            this.submit();
+                        }
+                    });
+                });
+            });
+        });
+    </script>
     <script>
         function getLocation() {
             if (navigator.geolocation) {

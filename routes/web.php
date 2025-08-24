@@ -11,12 +11,13 @@ Route::get('/', function () {
     return view('landing-page.home');
 })->name('home');
 
+Route::post('postIzin', [AbsenController::class, 'postIzin'])->name('kirim-izin');
 Route::controller(Authenticate::class)->group(function () {
     Route::get('login', 'index')->name('login');
     Route::post('login-user', 'login')->name('user-login');
     Route::post('logout', 'logout')->name('logout');
 
-});
+    });
 
 Route::prefix('user')->group(function() {
     Route::middleware('auth', 'user')->group(function() {
@@ -24,6 +25,7 @@ Route::prefix('user')->group(function() {
 
         Route::get('absen', [AbsenController::class, 'user_absen'])->name('user_absen');
         Route::post('/absen', [AbsenController::class, 'absenUser'])->name('absen.user');
+        Route::get('form_izin', [AbsenController::class, 'formIzin'])->name('form_izin');
     });
 });
 
@@ -49,6 +51,8 @@ Route::prefix('superadmin')->group(function () {
 
         Route::get('super-absen', [AbsenController::class, 'super_absen'])->name('super-absen');
         Route::post('/absen', [AbsenController::class, 'absenSuper'])->name('absen.store');
+        Route::put('change/data-absen/{id}', [AbsenController::class, 'updateSuper'])->name('update.super');
+        Route::delete('delete/data-absen/{id}', [AbsenController::class, 'deleteSuper'])->name('delete.absen');
 
         Route::get('user-list', [UserController::class, 'index'])->name('user-list');
         Route::post('add/user', [UserController::class, 'add_user'])->name('add-user');
