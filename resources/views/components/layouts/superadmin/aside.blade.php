@@ -30,7 +30,7 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link  @activeclass('admin/data_barang')" href="">
+                <a class="nav-link  @activeclass('superadmin/kas')" href="{{ route('super-kas') }}">
                     <i class="bi bi-cash-stack"></i>
                     <span>Kas</span>
                 </a>

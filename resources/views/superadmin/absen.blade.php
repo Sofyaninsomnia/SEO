@@ -1,6 +1,7 @@
 @extends('components.layouts.superadmin.header-content')
 @section('content')
-    <x-layouts.superadmin.header></x-layouts.superadmin.header>
+    <x-layouts.superadmin.header>
+    </x-layouts.superadmin.header>
     <x-layouts.superadmin.aside></x-layouts.superadmin.aside>
     <main id="main" class="main">
 
@@ -29,7 +30,7 @@
                                         Anda belum absen hari ini</span></div>
                             </div>
 
-                            <div class="d-flex justify-content-center align-items-center mb-4">
+                            <div class="d-flex justify-content-center align-items-center mb-4 gap-2">
                                 <form id="absenForm" action="{{ route('absen.store') }}" method="POST">
                                     @csrf
                                     <input type="hidden" name="latitude" id="latitude">
@@ -37,6 +38,7 @@
                                     <button type="button" onclick="getLocation()" class="btn btn-primary">Absen
                                         Sekarang</button>
                                 </form>
+                                <a href="{{ route('form_izin.super') }}" type="button" class="btn btn-success">Izin</a>
 
                             </div>
                         @else
@@ -107,6 +109,7 @@
                                                 <th>Nama</th>
                                                 <th>Status</th>
                                                 <th>Waktu absen</th>
+                                                <th>Surat</th>
                                                 <th>Keterangan</th>
                                                 <th>Action</th>
                                             </tr>
@@ -118,14 +121,31 @@
                                                     <td>{{ $absen->user->name }}</td>
                                                     <td>{{ ucwords($absen->status) }}</td>
                                                     <td>{{ $absen->waktu }}</td>
-                                                    <td>{{ $absen->keterangan }}</td>
+                                                    <td>
+                                                        @if ($absen->file)
+                                                            <a href="{{ Storage::url($absen->file) }}" target="_blank">Lihat
+                                                                File</a>
+                                                        @else
+                                                            <h4 class="text-center">-</h4>
+                                                        @endif
+                                                    </td>
+
+                                                    <td>
+                                                        @if ($absen->keterangan)
+                                                            {{ $absen->keterangan }}
+                                                        @else
+                                                            <h4 class="text-center">-</h4>
+                                                        @endif
+                                                    </td>
                                                     <td class="d-flex gap-2 text-center">
                                                         <button class="btn btn-sm btn-primary btn-edit"
                                                             data-id="{{ $absen->id }}"
                                                             data-name="{{ $absen->user->name }}"
                                                             data-status="{{ $absen->status }}" data-bs-toggle="modal"
                                                             data-bs-target="#editModal"><i class="bi bi-pen"></i></button>
-                                                        <form class="delete-form" action="{{ route('delete.absen', $absen->id) }}" method="POST">
+                                                        <form class="delete-form"
+                                                            action="{{ route('delete.absen', $absen->id) }}"
+                                                            method="POST">
                                                             @csrf
                                                             @method('DELETE')
                                                             <button class="btn btn-sm btn-danger"><i

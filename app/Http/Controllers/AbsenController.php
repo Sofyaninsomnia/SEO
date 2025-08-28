@@ -40,28 +40,29 @@ class AbsenController extends Controller
 
     public function admin_absen()
     {
+        // dd(session()->all());
         Carbon::setLocale('id'); 
 
+         $status = DB::table('absen')->distinct()->pluck('status');
         $tanggal = Carbon::today()->translatedFormat('l, d F Y');
         $userId = Auth::id();
         $today = Carbon::today();
         $dataUserAbsen = Absen::whereDate('tanggal', $today)->get();
         $userAbsen = Absen::where('user_id', $userId)->whereDate('tanggal', $today)->exists();
-        return view('admin.absen', compact('userAbsen', 'tanggal', 'dataUserAbsen'));
+        return view('admin.absen', compact('userAbsen', 'tanggal', 'dataUserAbsen', 'status'));
     }
 
     public function super_absen()
     {
         Carbon::setLocale('id'); 
-
-        // $absen = Absen::findOrFail($id);
+;
         $status = DB::table('absen')->distinct()->pluck('status');
         $tanggal = Carbon::today()->translatedFormat('l, d F Y');
         $userId = Auth::id();
         $today = Carbon::today();
         $userAbsen = Absen::where('user_id', $userId)->whereDate('tanggal', $today)->exists();
         $dataUserAbsen = Absen::whereDate('tanggal', $today)->get();
-        return view('absen.superadmin-absen', compact('userAbsen', 'tanggal', 'dataUserAbsen', 'status'));
+        return view('superadmin.absen', compact('userAbsen', 'tanggal', 'dataUserAbsen', 'status'));
     }
 
     public function absenUser(Request $request)
@@ -218,6 +219,12 @@ class AbsenController extends Controller
 
     public function formIzin(){
         return view('user.izin');
+    }
+    public function formIzinAdmin(){
+        return view('admin.izin');
+    }
+    public function formIzinSuper(){
+        return view('superadmin.izin');
     }
 
     public function postIzin(Request $request){

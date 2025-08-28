@@ -3,6 +3,7 @@
 use App\Http\Controllers\AbsenController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Authenticate;
+use App\Http\Controllers\KasController;
 use App\Http\Controllers\SuperController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -41,6 +42,8 @@ Route::prefix('admin')->group(function() {
 
         Route::get('absen', [AbsenController::class, 'admin_absen'])->name('admin_absen');
         Route::post('post/absen', [AbsenController::class, 'absenAdmin'])->name('absen.admin');
+        Route::get('form_izin', [AbsenController::class, 'formIzinAdmin'])->name('form_izin.admin');
+        Route::put('change/data-absen/{id}', [AbsenController::class, 'updateSuper'])->name('update.super');
     });
 });
 
@@ -53,11 +56,16 @@ Route::prefix('superadmin')->group(function () {
         Route::post('/absen', [AbsenController::class, 'absenSuper'])->name('absen.store');
         Route::put('change/data-absen/{id}', [AbsenController::class, 'updateSuper'])->name('update.super');
         Route::delete('delete/data-absen/{id}', [AbsenController::class, 'deleteSuper'])->name('delete.absen');
+        Route::get('form_izin', [AbsenController::class, 'formIzinSuper'])->name('form_izin.super');
 
         Route::get('user-list', [UserController::class, 'index'])->name('user-list');
         Route::post('add/user', [UserController::class, 'add_user'])->name('add-user');
         Route::put('change/data-user/{id}', [UserController::class, 'changeDataUser'])->name('update-user');
         Route::delete('hapus/user-data/{id}', [UserController::class, 'deleteUser'])->name('hapus-user');
+
+        Route::get('kas', [KasController::class, 'superKas'])->name('super-kas');
+        Route::post('add/tgl_kas/', [KasController::class, 'add_tgl'])->name('add-tgl');
+        Route::get('list-kas/{id}', [KasController::class, 'listKas'])->name('list-kas');
     });
 });
 

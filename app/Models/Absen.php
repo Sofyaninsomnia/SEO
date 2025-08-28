@@ -15,6 +15,7 @@ class Absen extends Model
         'tanggal',
         'waktu',
         'status',
+        'file',
         'keterangan',
     ];
 

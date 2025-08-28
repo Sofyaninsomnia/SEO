@@ -94,10 +94,10 @@
                 });
             @endif
 
-            @if ($errors->any())
+            @if (session('error'))
                 Swal.fire({
                     title: 'Kesalahan!',
-                    html: '@foreach ($errors->all() as $error) {{ $error }}<br> @endforeach',
+                    text: '{{ session('error') }}',
                     icon: 'error',
                     confirmButtonText: 'OK'
                 });
