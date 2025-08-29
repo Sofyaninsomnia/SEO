@@ -18,6 +18,19 @@
         <section class="section dashboard">
             <div class="row">
 
+                <div class="col-lg-12">
+                    <div class="row">
+                        <div class="card">
+                        <div class="card-body">
+                            <div class=" d-flex justify-content-between align-items-center mt-3">
+                                <button class="btn btn-success"><i class="bi bi-journals"></i> Rekap</button>
+                                <button class="btn btn-danger"><i class="bi bi-wallet2"></i> Pengeluaran</button>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+
                 <!-- Left side columns -->
                 <div class="col-lg-12">
                     <div class="row">
@@ -41,8 +54,14 @@
                                             @forelse ($data as $d)
                                                 <tr>
                                                     <td>{{ $loop->iteration }}</td>
-                                                    <td class="text-center">{{ \Carbon\Carbon::parse($d->tgl)->translatedFormat('l, d F Y') }}</td>
-                                                    <td><a href="{{ route('list-kas', $d->id) }}" class="btn btn-success"><i class="bi bi-search"></i></a></td>
+                                                    <td class="text-center">
+                                                        {{ \Carbon\Carbon::parse($d->tgl)->translatedFormat('l, d F Y') }}
+                                                    </td>
+                                                    <td class="d-flex gap-2"><a href="{{ route('list-kas', $d->id) }}" class="btn btn-primary btn-sm"><i class="bi bi-search"></i></a>
+                                                        <form class="delete-form" action="" method="POST">
+                                                            <button class="btn btn-danger btn-sm"><i class="bi bi-trash"></i></button>
+                                                        </form>
+                                                            </td>
                                                 </tr>
                                             @empty
                                             @endforelse

@@ -66,6 +66,7 @@ Route::prefix('superadmin')->group(function () {
         Route::get('kas', [KasController::class, 'superKas'])->name('super-kas');
         Route::post('add/tgl_kas/', [KasController::class, 'add_tgl'])->name('add-tgl');
         Route::get('list-kas/{id}', [KasController::class, 'listKas'])->name('list-kas');
+        Route::post('create/kas/{id}', [KasController::class, 'create_kas'])->name('create-kas');
     });
 });
 

@@ -14,12 +14,12 @@ return new class extends Migration
         Schema::create('kas', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('user_id')->unsigned();
-            $table->bigInteger('tgl_kas_id')->unsigned();
+            $table->bigInteger('tgl_id')->unsigned();
             $table->bigInteger('setor');
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
-            $table->foreign('tgl_kas_id')->references('id')->on('tgl_kas')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('tgl_id')->references('id')->on('tgl_kas')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 
