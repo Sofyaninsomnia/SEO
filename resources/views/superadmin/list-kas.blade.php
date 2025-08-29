@@ -32,7 +32,7 @@
                                             class="bi bi-plus"></i></button>
                                 </div>
                                 <div class="table-responsive">
-                                    <table class="datatable">
+                                    <table class="table table-bordered table-striped">
                                         <thead>
                                             <th>No</th>
                                             <th>Nama</th>
@@ -47,7 +47,7 @@
                                                     <td>{{ 'Rp. ' . number_format($kas->setor, 0, ',', '.') }}</td>
                                                     <td class="d-flex justify-content-center align-items-center gap-2">
                                                         <button class="btn btn-primary btn-sm"><i class="bi bi-pen"></i></button>
-                                                        <form class="delete-form" action="" method="POST">
+                                                        <form class="delete-form" action="{{ route('deleteListKas', $kas->id) }}" method="POST">
                                                             @csrf
                                                             @method('DELETE')
                                                             <button class="btn btn-danger btn-sm"><i class="bi bi-trash"></i></button>
@@ -55,6 +55,9 @@
                                                     </td>
                                                 </tr>
                                             @empty
+                                            <tr>
+                                                <td colspan="4" class="text-center">Tidak ada data</td>
+                                            </tr>
                                             @endforelse
                                         </tbody>
                                     </table>
@@ -85,6 +88,40 @@
                                             </div>
                                             <label for="setoran">Jumlah setor</label>
                                             <input type="number" class="form-control" name="setor"
+                                                placeholder="Input minimal Rp. 1000" required>
+                                            <div class="modal-footer">
+                                                <button type="submit" class="btn btn-success">Simpan</button>
+                                                <button type="button" class="btn btn-secondary"
+                                                    data-bs-dismiss="modal">Batal</button>
+                                            </div>
+                                        </div>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel"
+                            aria-hidden="true">
+                            <div class="modal-dialog">
+                                <form action="" method="post" accept-charset="utf-8">
+                                    @csrf
+                                    @method('PUT')
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="addModalLabel">Ubah list kas</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="form-group mb-2">
+                                                <label for="edit_user_id">Username</label>
+                                                <select name="user_id" id="edit_user_id" class="form-select">
+                                                    <option value="" selected disabled>Pilih user</option>
+                                                    @foreach ($user_id as $user)
+                                                        <option value="{{ $user->id }}">{{ $user->name }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                            <label for="edit_setoran">Jumlah setor</label>
+                                            <input type="number" id="edit_setor" class="form-control" name="setor"
                                                 placeholder="Input minimal Rp. 1000" required>
                                             <div class="modal-footer">
                                                 <button type="submit" class="btn btn-success">Simpan</button>

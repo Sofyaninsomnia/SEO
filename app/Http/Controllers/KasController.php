@@ -35,6 +35,20 @@ class KasController extends Controller
         return redirect()->back()->with('sukses', 'Data berhasil ditambahkan!, silahkan input user yang ingin bayar');
     }
 
+    public function deleteTglKas($id){
+        $data = Tgl::findOrFail($id);
+        $data->delete();
+
+        return redirect()->back()->with('sukses', 'Data berhasil dihapus!');
+    }
+
+    public function deleteListKas($id){
+        $data = Kas::findOrFail($id);
+        $data->delete();
+
+        return redirect()->back()->with('sukses', 'Data berhasil dihapus');
+    }
+
     public function listKas($id)
     {
         $tgl_kas = Tgl::with('kas.user')->findOrFail($id); 

@@ -6,6 +6,7 @@ use App\Http\Controllers\Authenticate;
 use App\Http\Controllers\KasController;
 use App\Http\Controllers\SuperController;
 use App\Http\Controllers\UserController;
+use App\Models\Kas;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -67,6 +68,8 @@ Route::prefix('superadmin')->group(function () {
         Route::post('add/tgl_kas/', [KasController::class, 'add_tgl'])->name('add-tgl');
         Route::get('list-kas/{id}', [KasController::class, 'listKas'])->name('list-kas');
         Route::post('create/kas/{id}', [KasController::class, 'create_kas'])->name('create-kas');
+        Route::delete('delete/tgl-kas/{ud}', [KasController::class, 'deleteTglKas'])->name('deleteTgl');
+        Route::delete('delete/list-kas/{id}', [KasController::class, 'deleteListKas'])->name('deleteListKas');
     });
 });
 

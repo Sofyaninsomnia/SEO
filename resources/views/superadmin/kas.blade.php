@@ -21,13 +21,14 @@
                 <div class="col-lg-12">
                     <div class="row">
                         <div class="card">
-                        <div class="card-body">
-                            <div class=" d-flex justify-content-between align-items-center mt-3">
-                                <button class="btn btn-success"><i class="bi bi-journals"></i> Rekap</button>
-                                <button class="btn btn-danger"><i class="bi bi-wallet2"></i> Pengeluaran</button>
+                            <div class="card-body">
+                                <div class=" d-flex justify-content-between align-items-center mt-3">
+                                    <button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#addModal"><i class="bi bi-plus"></i> Tambah</button>
+                                    <h5 class="text-center card-title">Tabel data kas</h5>
+                                    <button class="btn btn-outline-danger"><i class="bi bi-wallet2"></i> Pengeluaran</button>
+                                </div>
                             </div>
                         </div>
-                    </div>
                     </div>
                 </div>
 
@@ -39,9 +40,6 @@
                             <div class="card-body">
                                 <div class="d-flex justify-content-between align-items-center">
                                     <h4 class="card-title">Tanggal kas</h4>
-                                    <button class="btn btn-outline-primary" style="border-radius: 50%"
-                                        data-bs-toggle="modal" data-bs-target="#addModal"><i
-                                            class="bi bi-plus"></i></button>
                                 </div>
                                 <div class="table-responsive">
                                     <table class="datatable">
@@ -57,11 +55,16 @@
                                                     <td class="text-center">
                                                         {{ \Carbon\Carbon::parse($d->tgl)->translatedFormat('l, d F Y') }}
                                                     </td>
-                                                    <td class="d-flex gap-2"><a href="{{ route('list-kas', $d->id) }}" class="btn btn-primary btn-sm"><i class="bi bi-search"></i></a>
-                                                        <form class="delete-form" action="" method="POST">
-                                                            <button class="btn btn-danger btn-sm"><i class="bi bi-trash"></i></button>
+                                                    <td class="d-flex gap-2"><a href="{{ route('list-kas', $d->id) }}"
+                                                            class="btn btn-warning btn-sm"><i class="bi bi-eye"></i></a>
+                                                        <form class="delete-form" action="{{ route('deleteTgl', $d->id) }}"
+                                                            method="POST">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button class="btn btn-danger btn-sm"><i
+                                                                    class="bi bi-trash"></i></button>
                                                         </form>
-                                                            </td>
+                                                    </td>
                                                 </tr>
                                             @empty
                                             @endforelse
