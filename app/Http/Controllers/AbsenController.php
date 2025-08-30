@@ -54,6 +54,7 @@ class AbsenController extends Controller
 
     public function super_absen()
     {
+        
         Carbon::setLocale('id'); 
 ;
         $status = DB::table('absen')->distinct()->pluck('status');
@@ -67,6 +68,7 @@ class AbsenController extends Controller
 
     public function absenUser(Request $request)
     {
+        
         $request->validate([
             'latitude' => 'required|numeric',       
             'longitude' => 'required|numeric',
@@ -150,6 +152,7 @@ class AbsenController extends Controller
 
     public function absenSuper(Request $request)
     {
+        // dd($request->all());
         $request->validate([
             'latitude' => 'required|numeric',       
             'longitude' => 'required|numeric',

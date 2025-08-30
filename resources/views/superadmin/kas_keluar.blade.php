@@ -1,3 +1,4 @@
+
 @extends('components.layouts.superadmin.header-content')
 @section('content')
     <x-layouts.superadmin.header>
@@ -25,7 +26,7 @@
                                 <div class=" d-flex justify-content-between align-items-center mt-3">
                                     <button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#addModal"><i class="bi bi-plus"></i> Tambah</button>
                                     <h5 class="text-center card-title">Tabel data kas</h5>
-                                    <a href="{{ route('super.kas_keluar') }}" class="btn btn-outline-danger"><i class="bi bi-wallet2"></i> Pengeluaran</a>
+                                    <a href="{{ route('super-kas') }}" class="btn btn-outline-success"><i class="bi bi-wallet2"></i> Pemasukan</a>
                                 </div>
                             </div>
                         </div>
@@ -39,34 +40,33 @@
                         <div class="card">
                             <div class="card-body">
                                 <div class="d-flex justify-content-between align-items-center">
-                                    <h4 class="card-title">Tanggal kas</h4>
+                                    <h4 class="card-title">Kas keluar</h4>
+                                    <a href="" class="btn btn-outline-warning"><i class="bi bi-megaphone"></i> Report</a>
                                 </div>
                                 <div class="table-responsive">
-                                    <table class="datatable">
+                                    <table class="table table-bordered table-striped">
                                         <thead>
                                             <th>No</th>
-                                            <th class="text-center">Tanggal</th>
+                                            <th>Tanggal</th>
+                                            <th>Jumlah</th>
+                                            <th>Keterangan</th>
+                                            <th>Dokumentasi</th>
                                             <th>Action</th>
                                         </thead>
                                         <tbody>
-                                            @forelse ($data as $d)
+                                            @forelse ($dataKas as $kas)
                                                 <tr>
                                                     <td>{{ $loop->iteration }}</td>
-                                                    <td class="text-center">
-                                                        {{ \Carbon\Carbon::parse($d->tgl)->translatedFormat('l, d F Y') }}
-                                                    </td>
-                                                    <td class="d-flex gap-2"><a href="{{ route('list-kas', $d->id) }}"
-                                                            class="btn btn-warning btn-sm"><i class="bi bi-eye"></i></a>
-                                                        <form class="delete-form" action="{{ route('deleteTgl', $d->id) }}"
-                                                            method="POST">
-                                                            @csrf
-                                                            @method('DELETE')
-                                                            <button class="btn btn-danger btn-sm"><i
-                                                                    class="bi bi-trash"></i></button>
-                                                        </form>
-                                                    </td>
+                                                    <td>{{ $data->tanggal }}</td>
+                                                    <td>{{ $data->jumlah }}</td>
+                                                    <td>{{ $data->keterangan }}</td>
+                                                    <td>{{ Storage::url($data->dokumentasi) }}</td>
+                                                    <td></td>
                                                 </tr>
                                             @empty
+                                                <tr>
+                                                    <td colspan="6" class="text-center">Tidak ada data</td>
+                                                </tr>
                                             @endforelse
                                         </tbody>
                                     </table>

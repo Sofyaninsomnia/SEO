@@ -4,6 +4,7 @@ use App\Http\Controllers\AbsenController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Authenticate;
 use App\Http\Controllers\KasController;
+use App\Http\Controllers\PengeluaranKasController;
 use App\Http\Controllers\SuperController;
 use App\Http\Controllers\UserController;
 use App\Models\Kas;
@@ -65,6 +66,7 @@ Route::prefix('superadmin')->group(function () {
         Route::delete('hapus/user-data/{id}', [UserController::class, 'deleteUser'])->name('hapus-user');
 
         Route::get('kas', [KasController::class, 'superKas'])->name('super-kas');
+        Route::get('kas_keluar', [PengeluaranKasController::class, 'index'])->name('super.kas_keluar');
         Route::post('add/tgl_kas/', [KasController::class, 'add_tgl'])->name('add-tgl');
         Route::get('list-kas/{id}', [KasController::class, 'listKas'])->name('list-kas');
         Route::post('create/kas/{id}', [KasController::class, 'create_kas'])->name('create-kas');
