@@ -51,4 +51,8 @@ class User extends Authenticatable
     public function kas(){
         return $this->hasMany(Kas::class);
     }
+
+    public function pesan(){
+        return $this->hasMany(Pesan::class);
+    }
 }

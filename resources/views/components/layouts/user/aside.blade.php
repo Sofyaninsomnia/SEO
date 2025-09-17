@@ -22,6 +22,13 @@
             </li>
 
             <li class="nav-item">
+                <a class="nav-link  @activeclass('user/saran/fitur')" href="{{ route('saran.user') }}">
+                    <i class="bi bi-chat"></i>
+                    <span>Saran Fitur</span>
+                </a>
+            </li>
+            
+            <li class="nav-item">
                 <a class="nav-link  @activeclass('admin/data_barang')" href="">
                     <i class="bi bi-chat-quote"></i>
                     <span>Quote</span>

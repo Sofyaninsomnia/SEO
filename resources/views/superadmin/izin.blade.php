@@ -24,7 +24,7 @@
                         <div class="card">
                             <h2 class="card-title">Form pengajuan izin absen</h2>
                             <div class="card-body">
-                                <form id="absenForm" action="{{ route('kirim-izin') }}" method="POST" enctype="multipart/form-data">
+                                <form id="absenForm" action="{{ route('super.send_izin') }}" method="POST" enctype="multipart/form-data">
                                     @csrf
                                     <input type="hidden" name="latitude" id="latitude">
                                     <input type="hidden" name="longitude" id="longitude">

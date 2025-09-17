@@ -5,6 +5,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Authenticate;
 use App\Http\Controllers\KasController;
 use App\Http\Controllers\PengeluaranKasController;
+use App\Http\Controllers\PesanController;
 use App\Http\Controllers\SuperController;
 use App\Http\Controllers\UserController;
 use App\Models\Kas;
@@ -14,7 +15,6 @@ Route::get('/', function () {
     return view('landing-page.home');
 })->name('home');
 
-Route::post('postIzin', [AbsenController::class, 'postIzin'])->name('kirim-izin');
 Route::controller(Authenticate::class)->group(function () {
     Route::get('login', 'index')->name('login');
     Route::post('login-user', 'login')->name('user-login');
@@ -27,8 +27,13 @@ Route::prefix('user')->group(function() {
         Route::get('dashboard', [UserController::class, 'dashboard'])->name('user.dashboard');
 
         Route::get('absen', [AbsenController::class, 'user_absen'])->name('user_absen');
-        Route::post('/absen', [AbsenController::class, 'absenUser'])->name('absen.user');
+        Route::post('/absen', [AbsenController::class, 'sendAbsen'])->name('absen.user');
         Route::get('form_izin', [AbsenController::class, 'formIzin'])->name('form_izin');
+        Route::post('send_izin', [AbsenController::class, 'sendIzin_user'])->name('user.send_izin');
+
+        Route::get('saran/fitur', [PesanController::class, 'user'])->name('saran.user');
+        Route::post('send_pesan', [PesanController::class, 'send_chat'])->name('send_pesan');
+        Route::delete('delete/pesan/{id}', [PesanController::class, 'delete_pesan'])->name('delete');
     });
 });
 
@@ -43,9 +48,15 @@ Route::prefix('admin')->group(function() {
         Route::get('dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
 
         Route::get('absen', [AbsenController::class, 'admin_absen'])->name('admin_absen');
-        Route::post('post/absen', [AbsenController::class, 'absenAdmin'])->name('absen.admin');
+        Route::post('post/absen', [AbsenController::class, 'sendAbsen'])->name('absen.admin');
         Route::get('form_izin', [AbsenController::class, 'formIzinAdmin'])->name('form_izin.admin');
+        Route::post('send_izin', [AbsenController::class, 'sendIzin_admin'])->name('admin.send_izin');
         Route::put('change/data-absen/{id}', [AbsenController::class, 'updateSuper'])->name('update.super');
+        Route::delete('hapus/absen/{id}', [AbsenController::class, 'deleteAbsen'])->name('admin.absen_delete');
+
+        Route::get('saran/fitur', [PesanController::class, 'admin'])->name('saran.admin');
+        Route::post('send_pesan', [PesanController::class, 'send_chat'])->name('admin.send_chat');
+        Route::delete('delete/pesan/{id}', [PesanController::class, 'delete_pesan'])->name('admin.delete');
     });
 });
 
@@ -55,10 +66,17 @@ Route::prefix('superadmin')->group(function () {
         Route::get('dashboard', [SuperController::class, 'dashboard'])->name('superadmin.dashboard');
 
         Route::get('super-absen', [AbsenController::class, 'super_absen'])->name('super-absen');
-        Route::post('/absen', [AbsenController::class, 'absenSuper'])->name('absen.store');
+        Route::post('/absen', [AbsenController::class, 'sendAbsen'])->name('absen.store');
         Route::put('change/data-absen/{id}', [AbsenController::class, 'updateSuper'])->name('update.super');
-        Route::delete('delete/data-absen/{id}', [AbsenController::class, 'deleteSuper'])->name('delete.absen');
+        Route::delete('delete/data-absen/{id}', [AbsenController::class, 'deleteAbsen'])->name('delete.absen');
         Route::get('form_izin', [AbsenController::class, 'formIzinSuper'])->name('form_izin.super');
+        Route::post('send_izin', [AbsenController::class, 'sendIzin_super'])->name('super.send_izin');
+        Route::get('rekap_absen', [AbsenController::class, 'rekap_harian'])->name('absen.rekap_harian');
+
+        Route::get('chat/saran_fitur', [PesanController::class, 'super'])->name('list.pesan');
+        Route::get('feedback/pesan/{id}', [PesanController::class, 'feedback'])->name('feedback');
+        Route::put('send/feedback/{id}', [PesanController::class, 'update_feedback'])->name('send_feedback');
+        Route::delete('delete/pesan/{id}', [PesanController::class, 'delete_pesan'])->name('super.delete_chat');
 
         Route::get('user-list', [UserController::class, 'index'])->name('user-list');
         Route::post('add/user', [UserController::class, 'add_user'])->name('add-user');

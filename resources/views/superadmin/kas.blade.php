@@ -42,10 +42,11 @@
                                     <h4 class="card-title">Tanggal kas</h4>
                                 </div>
                                 <div class="table-responsive">
-                                    <table class="datatable">
+                                    <table class="table table-bordered table-striped">
                                         <thead>
                                             <th>No</th>
                                             <th class="text-center">Tanggal</th>
+                                            <th>Jumlah</th>
                                             <th>Action</th>
                                         </thead>
                                         <tbody>
@@ -55,6 +56,7 @@
                                                     <td class="text-center">
                                                         {{ \Carbon\Carbon::parse($d->tgl)->translatedFormat('l, d F Y') }}
                                                     </td>
+                                                    <td>{{'Rp. ' . number_format($d->saldo, 0, ',', '.') ?? '0' }}</td>
                                                     <td class="d-flex gap-2"><a href="{{ route('list-kas', $d->id) }}"
                                                             class="btn btn-warning btn-sm"><i class="bi bi-eye"></i></a>
                                                         <form class="delete-form" action="{{ route('deleteTgl', $d->id) }}"
@@ -67,6 +69,9 @@
                                                     </td>
                                                 </tr>
                                             @empty
+                                            <tr>
+                                                <td colspan="4" class="text-center">Tidak ada data</td>
+                                            </tr>
                                             @endforelse
                                         </tbody>
                                     </table>

@@ -6,7 +6,9 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Pagination\Paginator;
-use Illuminate\Support\Carbon;      
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\URL;
+
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -32,11 +34,14 @@ class AppServiceProvider extends ServiceProvider
                     : 'collapsed';
                 echo Request::is(\$__pattern) ? '' : \$__class;
             ?>";
-        });     
+        });
         Blade::directive('rupiah', function ($value) {
             return "<?php echo 'Rp ' . number_format($value, 0, ',', '.'); ?>";
         });
         Paginator::useBootstrapFive();
         Carbon::setLocale('id');
+        // if (config('app.env') === 'local') {
+        //     URL::forceScheme('https');
+        // }
     }
 }

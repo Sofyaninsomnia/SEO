@@ -99,7 +99,11 @@
                                 <div class="d-flex justify-content-between align-items-center">
                                     <h4 class="card-title">Data absen harian <span>Tanggal: {{ $tanggal }}</span></h4>
 
-                                    <button class="btn btn-success">Rekap</button>
+                                    @if ($dataUserAbsen->isEmpty())
+                                        
+                                    @else
+                                        <a href="{{ route('absen.rekap_harian') }}" class="btn btn-success">Rekap</a>
+                                    @endif
                                 </div>
                                 <div class="table-responsive">
                                     <table class="table table-bordered">

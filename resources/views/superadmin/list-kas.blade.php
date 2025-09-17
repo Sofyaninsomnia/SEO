@@ -61,6 +61,7 @@
                                             @endforelse
                                         </tbody>
                                     </table>
+                                    <p class="text-success">Total Keseluruhan : {{ 'Rp. ' .  number_format($total_kas, 0, ',', '.') }}</p>
                                 </div>
                             </div>
                         </div>

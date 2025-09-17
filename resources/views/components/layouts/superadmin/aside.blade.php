@@ -21,6 +21,14 @@
                 </a>
             </li>
 
+           
+            <li class="nav-item">
+                <a class="nav-link @activeclass('superadmin/chat/saran_fitur')" href="{{ route('list.pesan') }}">
+                    <i class="bi bi-chat"></i>
+                    <span>Saran Fitur</span>
+                </a>
+            </li>
+
             <!-- Data supplier -->
             <li class="nav-item">
                 <a class="nav-link  @activeclass('superadmin/user-list')" href="{{ route('user-list') }}">

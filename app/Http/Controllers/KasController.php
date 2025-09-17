@@ -13,7 +13,7 @@ class KasController extends Controller
 {
     public function superKas()
     {
-        $data = Tgl::all();
+        $data = Tgl::all(); 
         return view('superadmin.kas', compact('data'));
     }
 
@@ -54,8 +54,9 @@ class KasController extends Controller
         $tgl_kas = Tgl::with('kas.user')->findOrFail($id); 
         $tanggal = Carbon::parse($tgl_kas->tgl)->translatedFormat('l, d F Y');
         $user_id = User::all();
+        $total_kas = $tgl_kas->kas->sum('setor');
 
-        return view('superadmin.list-kas', compact('tgl_kas', 'tanggal', 'user_id'));
+        return view('superadmin.list-kas', compact('tgl_kas', 'tanggal', 'user_id', 'total_kas'));
     }
 
     public function create_kas(Request $request, $id){
@@ -75,6 +76,7 @@ class KasController extends Controller
             'user_id'       => $request->user_id,
             'setor'         => $request->setor
         ]);
+
 
         return redirect()->back()->with('sukses', 'Data berhasil ditambahkan!');
     }

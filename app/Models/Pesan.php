@@ -5,17 +5,18 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Tgl extends Model
+class Pesan extends Model
 {
     use HasFactory;
-    protected $table =  'tgl_kas';
 
+    protected $table = 'pesan';
     protected $fillable = [
-        'tgl',
-        'saldo'
+        'user_id',
+        'chat',
+        'feedback'
     ];
 
-    public function kas(){
-        return $this->hasMany(Kas::class);
+    public function user(){
+        return $this->belongsTo(User::class);
     }
 }

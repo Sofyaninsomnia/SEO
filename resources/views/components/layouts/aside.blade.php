@@ -21,37 +21,13 @@
                 </a>
             </li>
 
-            <!-- Data supplier -->
-            <li class="nav-item">
-                <a class="nav-link collapsed @activeclass('admin/data_supplier')" href="">
-                    <i class="bi bi-truck"></i>
-                    <span>Data supplier</span>
-                </a>
-            </li>
 
             <li class="nav-item">
-                <a class="nav-link collapsed @activeclass('admin/data_barang')" href="">
-                    <i class="bi bi-box-seam"></i>
-                    <span>Data barang</span>
+                <a class="nav-link collapsed @activeclass('admin/saran/fitur')" href="{{ route('saran.admin') }}">
+                    <i class="bi bi-chat"></i>
+                    <span>Saran Fitur</span>
                 </a>
             </li>
-
-            <!-- Pembelian -->
-            <li class="nav-item">
-                <a class="nav-link collapsed @activeclass('admin/barang_masuk')" href="">
-                    <i class="bi bi-box-arrow-in-down"></i>
-                    <span>Pembelian</span>
-                </a>
-            </li>
-
-            <!-- Penjualan -->
-            <li class="nav-item">
-                <a class="nav-link collapsed @activeclass('admin/penjualan')" href="">
-                    <i class="bi bi-box-arrow-in-up"></i>
-                    <span>Penjualan</span>
-                </a>
-            </li>
-            
             
             <li class="nav-heading">Laporan</li>
                 

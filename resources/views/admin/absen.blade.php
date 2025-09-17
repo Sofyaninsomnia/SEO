@@ -142,8 +142,12 @@
                                                             data-name="{{ $absen->user->name }}"
                                                             data-status="{{ $absen->status }}" data-bs-toggle="modal"
                                                             data-bs-target="#editModal"><i class="bi bi-pen"></i></button>
-                                                        <button class="btn btn-sm btn-danger"><i
-                                                                class="bi bi-trash"></i></button>
+                                                        <form class="delete-form" action="{{ route('admin.absen_delete', $absen->id ) }}" method="POST">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button class="btn btn-sm btn-danger"><i
+                                                                    class="bi bi-trash"></i></button>
+                                                        </form>
                                                     </td>
                                                 </tr>
                                             @empty

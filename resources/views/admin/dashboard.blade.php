@@ -1,9 +1,8 @@
 @extends('components.layouts.admin')
 @section('content')
+    <x-layouts.header></x-layouts.header>
 
-<x-layouts.header></x-layouts.header>
-
-<x-layouts.aside></x-layouts.aside>
+    <x-layouts.aside></x-layouts.aside>
     <main id="main" class="main">
 
         <div class="pagetitle">
@@ -103,4 +102,4 @@
             </div>
         </section>
     </main>
-    @endsection
+@endsection

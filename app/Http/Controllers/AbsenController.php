@@ -29,7 +29,8 @@ class AbsenController extends Controller
 
     public function user_absen()
     {
-        Carbon::setLocale('id'); 
+
+        Carbon::setLocale('id');
 
         $tanggal = Carbon::today()->translatedFormat('l, d F Y');
         $userId = Auth::id();
@@ -41,9 +42,9 @@ class AbsenController extends Controller
     public function admin_absen()
     {
         // dd(session()->all());
-        Carbon::setLocale('id'); 
+        Carbon::setLocale('id');
 
-         $status = DB::table('absen')->distinct()->pluck('status');
+        $status = DB::table('absen')->distinct()->pluck('status');
         $tanggal = Carbon::today()->translatedFormat('l, d F Y');
         $userId = Auth::id();
         $today = Carbon::today();
@@ -54,9 +55,8 @@ class AbsenController extends Controller
 
     public function super_absen()
     {
-        
-        Carbon::setLocale('id'); 
-;
+
+        Carbon::setLocale('id');
         $status = DB::table('absen')->distinct()->pluck('status');
         $tanggal = Carbon::today()->translatedFormat('l, d F Y');
         $userId = Auth::id();
@@ -66,11 +66,10 @@ class AbsenController extends Controller
         return view('superadmin.absen', compact('userAbsen', 'tanggal', 'dataUserAbsen', 'status'));
     }
 
-    public function absenUser(Request $request)
+    public function sendAbsen(Request $request)
     {
-        
         $request->validate([
-            'latitude' => 'required|numeric',       
+            'latitude' => 'required|numeric',
             'longitude' => 'required|numeric',
         ]);
 
@@ -103,97 +102,16 @@ class AbsenController extends Controller
                 'status'    => $status,
                 'distance' => $distance,
             ]);
-            return redirect()->route('user_absen')->with('sukses', 'Absensi berhasil!');
+            return redirect()->back()->with('sukses', 'Absensi berhasil!');
         } else {
-            return redirect()->route('user_absen')->with('error', 'Anda berada di luar area yang diperbolehkan. Jarak Anda: ' . number_format($distance, 2) . ' km');
+            return redirect()->back()->with('error', 'Anda berada di luar area yang diperbolehkan. Jarak Anda: ' . number_format($distance, 2) . ' km');
         }
     }
-    public function absenAdmin(Request $request)
+
+    
+
+    public function updateSuper(Request $request, $id)
     {
-        $request->validate([
-            'latitude' => 'required|numeric',       
-            'longitude' => 'required|numeric',
-        ]);
-
-        $userLat = $request->input('latitude');
-        $userLon = $request->input('longitude');
-
-        $officeLat = (float) env('OFFICE_LATITUDE');
-        $officeLon = (float) env('OFFICE_LONGITUDE');
-        $allowedRadius = (float) env('ALLOWED_RADIUS_KM');
-        $timezone = 'Asia/Jakarta';
-        $deadlineTime = Carbon::createFromFormat('H:i:s', env('ABSEN_DEADLINE_TIME'), $timezone);
-        $absenTime = Carbon::now($timezone);
-        $userAbsen = Auth::id();
-
-        $status = 'hadir';
-
-        if ($absenTime->gt($deadlineTime)) {
-            $status = 'telat';
-        }
-
-        $distance = $this->haversineDistance($officeLat, $officeLon, $userLat, $userLon);
-
-        if ($distance <= $allowedRadius) {
-            Absen::create([
-                'user_id' => $userAbsen,
-                'latitude' => $userLat,
-                'longitude' => $userLon,
-                'tanggal' => $absenTime->toDateString(),
-                'waktu' => $absenTime->toTimeString(),
-                'status'    => $status,
-                'distance' => $distance,
-            ]);
-            return redirect()->route('admin_absen')->with('sukses', 'Absensi berhasil!');
-        } else {
-            return redirect()->route('admin_absen')->with('error', 'Anda berada di luar area yang diperbolehkan. Jarak Anda: ' . number_format($distance, 2) . ' km');
-        }
-    }
-
-    public function absenSuper(Request $request)
-    {
-        // dd($request->all());
-        $request->validate([
-            'latitude' => 'required|numeric',       
-            'longitude' => 'required|numeric',
-        ]);
-
-        $userLat = $request->input('latitude');
-        $userLon = $request->input('longitude');
-
-        $officeLat = (float) env('OFFICE_LATITUDE');
-        $officeLon = (float) env('OFFICE_LONGITUDE');
-        $allowedRadius = (float) env('ALLOWED_RADIUS_KM');
-        $timezone = 'Asia/Jakarta';
-        $deadlineTime = Carbon::createFromFormat('H:i:s', env('ABSEN_DEADLINE_TIME'), $timezone);
-        $absenTime = Carbon::now($timezone);
-        $userAbsen = Auth::id();
-
-        $status = 'hadir';
-
-        if ($absenTime->gt($deadlineTime)) {
-            $status = 'telat';
-        }
-
-        $distance = $this->haversineDistance($officeLat, $officeLon, $userLat, $userLon);
-
-        if ($distance <= $allowedRadius) {
-            Absen::create([
-                'user_id' => $userAbsen,
-                'latitude' => $userLat,
-                'longitude' => $userLon,
-                'tanggal' => $absenTime->toDateString(),
-                'waktu' => $absenTime->toTimeString(),
-                'status'    => $status,
-                'distance' => $distance,
-            ]);
-            return redirect()->route('super-absen')->with('sukses', 'Absensi berhasil!');
-        } else {
-            return redirect()->route('super-absen')->with('error', 'Anda berada di luar area yang diperbolehkan. Jarak Anda: ' . number_format($distance, 2) . ' km');
-        }
-    }
-
-    public function updateSuper(Request $request, $id){
         $absen = Absen::findOrFail($id);
 
         $rules = [
@@ -212,7 +130,8 @@ class AbsenController extends Controller
         return redirect()->back()->with('sukses', 'Data berhasil diupdate');
     }
 
-    public function deleteSuper($id){
+    public function deleteAbsen($id)
+    {
         $absen = Absen::findOrFail($id);
 
         $absen->delete();
@@ -220,17 +139,21 @@ class AbsenController extends Controller
         return redirect()->back()->with('sukses', 'Data berhasil dihapus');
     }
 
-    public function formIzin(){
+    public function formIzin()
+    {
         return view('user.izin');
     }
-    public function formIzinAdmin(){
+    public function formIzinAdmin()
+    {
         return view('admin.izin');
     }
-    public function formIzinSuper(){
+    public function formIzinSuper()
+    {
         return view('superadmin.izin');
     }
 
-    public function postIzin(Request $request){
+    public function sendIzin_user(Request $request)
+    {
         $request->validate([
             'latitude'      => 'required|numeric',
             'longitude'     => 'required|numeric',
@@ -258,6 +181,80 @@ class AbsenController extends Controller
             'keterangan'    => $request->keterangan
         ]);
 
-        return redirect()->back()->with('sukses', 'Izin berhasil di kirim');
+        return redirect()->route('user_absen')->with('sukses', 'Izin berhasil di kirim');
+    }
+
+    public function sendIzin_admin(Request $request)
+    {
+        $request->validate([
+            'latitude'      => 'required|numeric',
+            'longitude'     => 'required|numeric',
+            'status'        => 'required|in:izin,sakit',
+            'file'          => 'required|image|mimes:jpg,png,jpeg|max:5048',
+            'keterangan'    => 'nullable|string|max:255'
+        ]);
+
+        $userLat = $request->input('latitude');
+        $userLon = $request->input('longitude');
+        $timezone = 'Asia/Jakarta';
+        $absenTime = Carbon::now($timezone);
+        $userAbsen = Auth::id();
+
+        $foto = $request->file('file')->store('surat', 'public');
+
+        Absen::create([
+            'user_id'       => $userAbsen,
+            'latitude'      => $userLat,
+            'longitude'     => $userLon,
+            'tanggal'       => $absenTime->toDateString(),
+            'waktu'         => $absenTime->toTimeString(),
+            'status'        => $request->status,
+            'file'          => $foto,
+            'keterangan'    => $request->keterangan
+        ]);
+
+        return redirect()->route('admin_absen')->with('sukses', 'Izin berhasil di kirim');
+    }
+    
+    public function sendIzin_super(Request $request)
+    {
+        $request->validate([
+            'latitude'      => 'required|numeric',
+            'longitude'     => 'required|numeric',
+            'status'        => 'required|in:izin,sakit',
+            'file'          => 'required|image|mimes:jpg,png,jpeg|max:5048',
+            'keterangan'    => 'nullable|string|max:255'
+        ]);
+
+        $userLat = $request->input('latitude');
+        $userLon = $request->input('longitude');
+        $timezone = 'Asia/Jakarta';
+        $absenTime = Carbon::now($timezone);
+        $userAbsen = Auth::id();
+
+        $foto = $request->file('file')->store('surat', 'public');
+
+        Absen::create([
+            'user_id'       => $userAbsen,
+            'latitude'      => $userLat,
+            'longitude'     => $userLon,
+            'tanggal'       => $absenTime->toDateString(),
+            'waktu'         => $absenTime->toTimeString(),
+            'status'        => $request->status,
+            'file'          => $foto,
+            'keterangan'    => $request->keterangan
+        ]);
+
+        return redirect()->route('super-absen')->with('sukses', 'Izin berhasil di kirim');
+    }
+
+    public function rekap_harian()
+    {
+        Carbon::setLocale('id');
+
+        $tanggal = Carbon::today()->translatedFormat('l, d F Y');
+        $today = Carbon::today();
+        $dataUserAbsen = Absen::whereDate('tanggal', $today)->get();
+        return view('rekap.absen_harian', compact('tanggal', 'dataUserAbsen'));
     }
 }
